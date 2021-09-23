@@ -4,6 +4,10 @@ import AuthService from "./AuthService";
 
 function ProtectedRoute({component: Component, authed, ...rest}) {
   authed=AuthService.loggedIn();
+  if(authed===null)
+    authed=false;
+    
+  console.log(authed);
         return (
           <Route
             {...rest}

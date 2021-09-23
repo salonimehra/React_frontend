@@ -7,20 +7,39 @@ export default class AddProduct extends Component {
         this.state={
             id:this.props.match.params.id,
             quantity:this.props.match.params.quantity,
-            productItems:[]
+            productItems:"",
+            productList:[]
         }
         
     }
     //lifecycle method to call restapi
     
     componentDidMount() {
+      
       ProductService.getProductsInCart(this.state.id,this.state.quantity).then(
         response => {
           //console.log(response.data)
           this.setState({
             productItems: response.data
           });
-          //console.log(this.state.productItems,"from here");
+          console.log(this.state.productItems,"from here");
+        },
+        error => {
+          this.setState({
+            productItems:
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString()
+          });
+          console.log(error);
+        }
+      );
+      ProductService.getAllProducts().then(
+        response => {
+          console.log(response.data)
+          this.setState({
+            productList: response.data
+          });
         },
         error => {
           this.setState({
@@ -32,6 +51,7 @@ export default class AddProduct extends Component {
         }
       );
     }
+
     render() {
         return (
             <div>
@@ -60,30 +80,18 @@ export default class AddProduct extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      {
+                        this.state.productList.map(
+                          item=>
+                      <tr key={item.productId}>
                         <td><a className="remove" href="#"></a></td>
-                        <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"/></a></td>
-                        <td><a className="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$250</td>
-                        <td><input className="aa-cart-quantity" type="number" defaultValue="1"/></td>
-                        <td>$250</td>
+                        <td><a href="#"><img src={item.imgURL} height="150" width="200" alt="img"/></a></td>
+                        <td><a className="aa-cart-title" href="#">{item.productName}</a></td>
+                        <td>{item.productPrice}</td>
+                        <td><input className="aa-cart-quantity" type="number" value={item.productQuantity}/></td>
+                        <td>{item.productPrice}</td>
                       </tr>
-                      <tr>
-                        <td><a className="remove" href="#"></a></td>
-                        <td><a href="#"><img src="img/man/polo-shirt-2.png" alt="img"/></a></td>
-                        <td><a className="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$150</td>
-                        <td><input className="aa-cart-quantity" type="number" defaultValue="1"/></td>
-                        <td>$150</td>
-                      </tr>
-                      <tr>
-                        <td><a className="remove" href="#"></a></td>
-                        <td><a href="#"><img src="img/man/polo-shirt-3.png" alt="img"/></a></td>
-                        <td><a className="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                        <td>$50</td>
-                        <td><input className="aa-cart-quantity" type="number" defaultValue="1"/></td>
-                        <td>$50</td>
-                      </tr>
+                        )}
 
                       </tbody>
                   </table>

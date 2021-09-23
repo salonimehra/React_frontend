@@ -23,7 +23,7 @@ class AuthService {
   }
 
   loggedIn(){
-    return axios.post(API_URL+'authorize',null,{ headers: authHeader() }).then((response)=>{return response.data});
+    return axios.post(API_URL+'authorize',null,{ headers: authHeader() }).then((response)=>{console.log(response.data);return response.data});
   }
 
   register(username, email, password) {
