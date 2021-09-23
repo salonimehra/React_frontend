@@ -37,6 +37,7 @@ import authHeader from "./AuthHeader";
 
 const USERS_REST_API_URL="http://localhost:8080/api/";
 const PRODUCTS_IN_CART="http://localhost:8085/placed-order/api/v1/placeorder";
+
 class ProductService{
   getPublicContent(){
        const GET_USERS_URL= USERS_REST_API_URL+"/products";
@@ -45,7 +46,7 @@ class ProductService{
     }
     getProductsInCart(productId,quantity){
       var URL=PRODUCTS_IN_CART + "/"+productId+"/"+quantity
-      console.log(axios.post(URL,null ,{ headers: authHeader() }));
+      //console.log(axios.post(URL,null ,{ headers: authHeader() }));
       return axios.post(URL,null ,{ headers: authHeader() });
     }
     

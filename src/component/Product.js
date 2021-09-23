@@ -38,17 +38,16 @@ class Product extends React.Component{
 
     addProduct(id,quantity){
         const user=AuthService.getCurrentUser();
-        //console.log(user);
+        console.log(user);
         if(user){
             this.setState({
                 currentUser:user
             })
         }
-        //console.log(this.props.history);
+        console.log(this.props.history);
         if(this.state.currentUser){
         this.props.history.push(`/add/${id}/${quantity}`);
-        //console.log("ADD PRODUCT");
-    }
+        console.log("ADD PRODUCT");}
     }
     
     //return html 

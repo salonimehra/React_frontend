@@ -29,7 +29,7 @@ export default class Home extends Component {
             
       <div>
           <h3>
-            <strong>hi</strong> Profile
+            <strong>hi</strong> 
           </h3>
       <header id="header"> 
         <Header_top/>

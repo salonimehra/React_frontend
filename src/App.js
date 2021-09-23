@@ -53,8 +53,8 @@ import {BrowserRouter as Routers, Switch,Route} from 'react-router-dom'
 import AddProduct from './component/AddProduct';
 import Login from './component/Login';
 import AuthService from './services/AuthService';
-import Product from './component/Product';
-import header_middle from './component/header_middle';
+import ProtectedRoute from './services/ProtectedRoute';
+
 
 
 /*https://www.bezkoder.com/react-jwt-auth/
@@ -87,11 +87,11 @@ class App extends React.Component
       <div>
         <Routers>
           <Switch>
-            <Route path="/" exact component={Home}/>
+            <Route path={["/","/home"]} exact component={Home}/>
+            {/* <ProtectedRoute authed={this.state.currentUser} component={AddProduct} path="/add/:id/:quantity"/>*/}
+            
             <Route path="/add/:id/:quantity" component={AddProduct}/>
             <Route path="/login" component={Login}/>
-            <Route path="/products" component={Product}/>
-            <Route path="/headerMiddle" component={header_middle}/>
           </Switch>
         </Routers>
       </div>

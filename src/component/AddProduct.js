@@ -12,20 +12,15 @@ export default class AddProduct extends Component {
         
     }
     //lifecycle method to call restapi
-    componentDidMount(){
-      ProductService.getProductsInCart(this.state.id,this.state.quantity).then((response,error)=>{
-          if(response)
-          this.setState({productItems:response.data});
-          //else
-          console.log(error);
-      })
-    }
+    
     componentDidMount() {
       ProductService.getProductsInCart(this.state.id,this.state.quantity).then(
         response => {
+          //console.log(response.data)
           this.setState({
             productItems: response.data
           });
+          //console.log(this.state.productItems,"from here");
         },
         error => {
           this.setState({
@@ -42,7 +37,7 @@ export default class AddProduct extends Component {
             <div>
                 <h1>Add Products</h1>
                 <h2>{this.state.id}</h2>
-                <h2>{this.state.productItems}</h2>
+                <h2>{this.state.productItems.toString()}</h2>
                 {/*addition here */}
                 
  <section id="cart-view">
