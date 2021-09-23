@@ -101,7 +101,7 @@ class Product extends React.Component{
                             <div className="overlay-content">
                             <h2><span className="rupee">Rs.</span>{products.price}</h2>
                             <p>{products.description} </p>
-                            <a href="#" className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</a>
+                            <button className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</button>
                             </div>
                           </div>
                       </div>

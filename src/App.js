@@ -88,9 +88,9 @@ class App extends React.Component
         <Routers>
           <Switch>
             <Route path={["/","/home"]} exact component={Home}/>
-            {/* <ProtectedRoute authed={this.state.currentUser} component={AddProduct} path="/add/:id/:quantity"/>*/}
+            <ProtectedRoute authed={this.state.currentUser} component={AddProduct} path="/add/:id/:quantity"/>
             
-            <Route path="/add/:id/:quantity" component={AddProduct}/>
+            {/* <Route path="/add/:id/:quantity" component={AddProduct}/> */}
             <Route path="/login" component={Login}/>
           </Switch>
         </Routers>
