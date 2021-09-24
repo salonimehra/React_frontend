@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
+import AuthService from '../services/AuthService';
 
 
 class header_middle extends Component {
@@ -7,11 +8,20 @@ class header_middle extends Component {
     //compulsory to make super 
     super(props);
     this.state={
-        
+        currentUser:AuthService.getCurrentUser()
     }
     this.login=this.login.bind(this)
 }
-
+choice(){
+  if(!this.state.currentUser){
+    return(
+    <li><a href="#" onClick={()=>this.login()} ><i className="fa fa-lock"></i> Login</a></li>
+    )
+  }
+  return(
+    <li><a href="#" onClick={()=>{AuthService.logout();window.location.reload()}} ><i className="fa fa-lock"></i> Log out</a></li>
+    )
+}
 login(){
     console.log(this.props.history,"HISTORY");
     this.props.history.push("/login");
@@ -57,7 +67,7 @@ login(){
                     <li><a href="#"><i className="fa fa-star"></i> Wishlist</a></li>
                     <li><a href="#"><i className="fa fa-crosshairs"></i> Checkout</a></li>
                     <li><a href="/viewCart"><i className="fa fa-shopping-cart"></i> Cart</a></li>
-                    <li><a href="#" onClick={()=>this.login()} ><i className="fa fa-lock"></i> Login</a></li>
+                    {this.choice()}
                   </ul>
                 </div>
               </div>

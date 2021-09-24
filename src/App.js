@@ -57,6 +57,7 @@ import ProtectedRoute from './services/ProtectedRoute';
 
 
 
+
 /*https://www.bezkoder.com/react-jwt-auth/
 https://www.youtube.com/watch?v=XkVpb_8IPUM */
 class App extends React.Component
@@ -85,12 +86,12 @@ class App extends React.Component
   {
     return (
       <div>
-        <Routers>
+        <Routers >
           <Switch>
             <Route path={["/","/home"]} exact component={Home}/>
-            {/* <ProtectedRoute authed={this.state.currentUser} component={AddProduct} path="/add/:id/:quantity"/>*/}
+            <ProtectedRoute authed={this.state.currentUser} component={AddProduct} path="/add/:id/:quantity"/>
             
-            <Route path="/add/:id/:quantity" component={AddProduct}/>
+            {/* <Route path="/add/:id/:quantity" component={AddProduct}/> */}
             <Route path="/login" component={Login}/>
           </Switch>
         </Routers>

@@ -1,8 +1,8 @@
+############# AppProduct.js ############
 import React, { Component } from 'react'
-import { withRouter } from 'react-router';
 import ProductService from '../services/productService'
 
-class AddProduct extends Component {
+export default class AddProduct extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -32,7 +32,7 @@ class AddProduct extends Component {
               error.message ||
               error.toString()
           });
-          //console.log(error);
+          console.log(error);
         }
       );
       ProductService.getAllProducts().then(
@@ -53,14 +53,12 @@ class AddProduct extends Component {
       );
     }
 
-    
     render() {
         return (
             <div>
                 <h1>Add Products</h1>
                 <h2>{this.state.id}</h2>
                 <h2>{this.state.productItems.toString()}</h2>
-                <button className="btn btn-default" onClick={this.props.history.goBack}><i></i>Home</button>
                 {/*addition here */}
                 
  <section id="cart-view">
@@ -88,7 +86,7 @@ class AddProduct extends Component {
                           item=>
                       <tr key={item.productId}>
                         <td><a className="remove" href="#"></a></td>
-                        <td><a href="#"><img src={item.imgURL} height="150" width="200" alt="img"/></a></td>
+                        <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"/></a></td>
                         <td><a className="aa-cart-title" href="#">{item.productName}</a></td>
                         <td>{item.productPrice}</td>
                         <td><input className="aa-cart-quantity" type="number" value={item.productQuantity}/></td>
@@ -131,4 +129,67 @@ class AddProduct extends Component {
     }
 }
 
-export default withRouter(AddProduct);
+
+##################################################################################################################################
+############# ProductService.js ############
+/*import http from "../http-common";
+
+class TutorialDataService {
+  getAll() {
+    return http.get("/products");
+  }
+
+  get(id) {
+    return http.get(`/products/${id}`);
+  }
+
+  create(data) {
+    return http.post("/products", data);
+  }
+
+  update(id, data) {
+    return http.put(`/products/${id}`, data);
+  }
+
+  delete(id) {
+    return http.delete(`/products/${id}`);
+  }
+
+  deleteAll() {
+    return http.delete(`/products`);
+  }
+
+  findByTitle(title) {
+    return http.get(`/products?title=${title}`);
+  }
+}
+
+export default new TutorialDataService();
+*/
+import axios from "axios";
+import authHeader from "./AuthHeader";
+
+const USERS_REST_API_URL="http://localhost:8080/api/";
+const PRODUCTS_IN_CART="http://localhost:8085/placed-order/api/v1/placeorder";
+
+class ProductService{
+  getPublicContent(){
+       const GET_USERS_URL= USERS_REST_API_URL+"/products";
+        //axios has method get that gets from url
+        return axios.get(GET_USERS_URL);
+    }
+    getProductsInCart(productId,quantity){
+      var URL=PRODUCTS_IN_CART + "/"+productId+"/"+quantity
+      //console.log(axios.post(URL,null ,{ headers: authHeader() }));
+      return axios.post(URL,null ,{ headers: authHeader() });
+    }
+    getAllProducts(){
+      var URL=PRODUCTS_IN_CART + "/orders"
+      //console.log(axios.post(URL,null ,{ headers: authHeader() }));
+      return axios.post(URL,null ,{ headers: authHeader() });
+    }
+}
+
+//export object of class
+export default new ProductService();
+##################################################################################################################################

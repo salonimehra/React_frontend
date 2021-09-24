@@ -38,13 +38,13 @@ class Product extends React.Component{
 
     addProduct(id,quantity){
         const user=AuthService.getCurrentUser();
-        console.log(user);
+        
         if(user){
             this.setState({
                 currentUser:user
             })
         }
-        console.log(this.props.history);
+
         if(this.state.currentUser){
         this.props.history.push(`/add/${id}/${quantity}`);
         console.log("ADD PRODUCT");}
@@ -95,13 +95,12 @@ class Product extends React.Component{
                             <img src={products.imgURL} alt="" height="250" width="200" />
                             <h2><span className="rupee">Rs.</span>{products.price}</h2>
                             <p>{products.description} </p>
-                            <a href="#" className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</a>
-                          </div>
+                            <button className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</button>                          </div>
                           <div className="product-overlay">
                             <div className="overlay-content">
                             <h2><span className="rupee">Rs.</span>{products.price}</h2>
                             <p>{products.description} </p>
-                            <a href="#" className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</a>
+                            <button className="btn btn-default add-to-cart" onClick={()=>this.addProduct(products.id,1)}><i className="fa fa-shopping-cart"></i>Add to cart</button>
                             </div>
                           </div>
                       </div>
